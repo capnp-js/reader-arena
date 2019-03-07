@@ -3,6 +3,7 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
 import { Unlimited } from "@capnp-js/base-arena";
+import { create } from "@capnp-js/bytes";
 import { Builder } from "@capnp-js/builder-arena";
 import { PointerLevelError, ReadLimitError } from "@capnp-js/internal-error";
 import { root } from "@capnp-js/memory";
@@ -14,7 +15,7 @@ import Reader from "../../src/Reader";
 //      Check that it round trips correctly.
 describe("Reader", function () {
   describe(".getRoot", function () {
-    const segment = { id: 0, raw: new Uint8Array(24), end: 24 };
+    const segment = { id: 0, raw: create(24), end: 24 };
     const arena = Reader.limited([segment], 1024, 64);
     const root = arena.getRoot();
     it("returns null for uninitialized root pointers", function () {
@@ -23,7 +24,7 @@ describe("Reader", function () {
   });
 
   describe(".specificStructLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x00,
@@ -46,7 +47,7 @@ describe("Reader", function () {
   });
 
   describe(".genericStructLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x00,
@@ -69,7 +70,7 @@ describe("Reader", function () {
   });
 
   describe(".boolListLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x01,
@@ -92,7 +93,7 @@ describe("Reader", function () {
   });
 
   describe(".blobLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x01,
@@ -116,7 +117,7 @@ describe("Reader", function () {
   });
 
   describe(".specificNonboolListLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x01,
@@ -139,7 +140,7 @@ describe("Reader", function () {
   });
 
   describe(".genericNonboolListLayout", function () {
-    const segment = { id: 0, raw: new Uint8Array(16), end: 16 };
+    const segment = { id: 0, raw: create(16), end: 16 };
     const reader = Reader.limited([segment], 8, 64);
     const p = {
       typeBits: 0x01,

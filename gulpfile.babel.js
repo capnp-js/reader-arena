@@ -82,8 +82,9 @@ function browserRollup() {
   return rollup({
     input: "browser/lib/index.js",
     external: [
-      "@capnp-js/core",
       "@capnp-js/base-arena",
+      "@capnp-js/bytes",
+      "@capnp-js/core",
       "@capnp-js/internal-error",
       "@capnp-js/memory",
       "@capnp-js/reader-core",
@@ -98,8 +99,9 @@ function browserRollup() {
       name: "capnpJsReaderArena",
       sourcemap: true,
       globals: {
-        "@capnp-js/core": "capnpJsCore",
         "@capnp-js/base-arena": "capnpJsBaseArena",
+        "@capnp-js/bytes": "capnpJsBytes",
+        "@capnp-js/core": "capnpJsCore",
         "@capnp-js/internal-error": "capnpJsInternalError",
         "@capnp-js/memory": "capnpJsMemory",
         "@capnp-js/reader-core": "capnpJsReaderCore",
